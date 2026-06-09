@@ -77,44 +77,17 @@ spec:
         
         stage('Build') {
             steps {
-                container('docker') {
+                container('kaniko') {
                     echo "3. 构建镜像"
                     script {
-                        withCredentials([usernamePassword(
-                            credentialsId: 'harbor-auth',
-                            usernameVariable: 'DOCKER_USER',
-                            passwordVariable: 'DOCKER_PASSWORD'
-                        )]) {
-                            // 检查 docker daemon 是否可用
-                            sh """
-                                echo "检查 Docker daemon 连接..."
-                                docker version || echo "Docker 命令失败"
-                                echo "当前用户: \$(whoami)"
-                                ls -la /var/run/docker.sock 2>/dev/null || echo "docker.sock 不存在"
-                            """
-                            
-                            // 构建镜像
-                            sh "docker build -t ${env.IMAGE} ."
-                        }
-                    }
-                }
-            }
-        }
-        
-        stage('Push') {
-            steps {
-                container('docker') {
-                    echo "4. 推送镜像"
-                    withCredentials([usernamePassword(
-                        credentialsId: 'harbor-auth',
-                        usernameVariable: 'DOCKER_USER',
-                        passwordVariable: 'DOCKER_PASSWORD'
-                    )]) {
                         sh """
-                            docker login ${REGISTRY_URL} -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
-                            docker push ${env.IMAGE}
+                            /kaniko/executor \
+                            --dockerfile=Dockerfile \
+                            --context=`pwd` \
+                            --destination=${env.IMAGE}\
+                            --cleanup
                         """
-                    }
+                     }
                 }
             }
         }
