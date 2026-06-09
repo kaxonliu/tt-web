@@ -110,7 +110,7 @@ spec:
                                     # 检查 kubeconfig
                                     kubectl config view --minify
                                     # 替换镜像标签并部署
-                                    sed -i 's/<BUILD_TAG>/${env.IMAGE_TAG}/g' ./k8s/prod.yaml
+                                    sed -i 's/IMAGE_PLACEHOLDER/${env.IMAGE}/g' ./k8s/prod.yaml
                                     echo "应用生产配置："
                                     cat ./k8s/prod.yaml
                                     kubectl apply -f ./k8s/prod.yaml --record
@@ -129,7 +129,7 @@ spec:
                                     # 检查 kubeconfig
                                     kubectl config view --minify
                                     # 替换镜像标签并部署
-                                    sed -i 's/<BUILD_TAG>/${env.IMAGE_TAG}/g' ./k8s/dev.yaml
+                                    sed -i 's/IMAGE_PLACEHOLDER/${env.IMAGE}/g' ./k8s/dev.yaml
                                     echo "应用测试配置："
                                     cat ./k8s/dev.yaml
                                     kubectl apply -f ./k8s/dev.yaml --record
