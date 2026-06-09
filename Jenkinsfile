@@ -113,7 +113,7 @@ spec:
                                     sed -i 's/IMAGE_TAG/${env.IMAGE_TAG}/g' ./k8s/prod.yaml
                                     echo "应用生产配置："
                                     cat ./k8s/prod.yaml
-                                    kubectl apply -f ./k8s/prod.yaml --record
+                                    kubectl apply -f ./k8s/prod.yaml
                                 """
                                 echo "部署完成"
                             }
