@@ -23,16 +23,24 @@ spec:
     - name: DOCKER_CONFIG
       value: /home/user/.docker
     volumeMounts:
-    - name: docker-config
-      mountPath: /home/user/.docker
-  volumes:
-    - name: docker-config
-    secret:
-      secretName: registry-secret
+     - name: docker-config
+       mountPath: /home/user/.docker/
+     - name: kaniko-secret
+       mountPath: /secret
   - name: kubectl
     image: alpine/kubectl
     command: ['cat']
     tty: true
+  volumes:
+    - name: docker-config
+      secret:
+        secretName: registry-secret
+        items:
+          - key: .dockerconfigjson
+            path: config.json
+    - name: kaniko-secret
+      secret:
+        secretName: registry-secret
 """
         }
     }
