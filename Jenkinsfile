@@ -101,7 +101,7 @@ spec:
                         if (env.GIT_BRANCH == 'origin/main') {
                             echo "部署到生产K8S集群"
                             withCredentials([file(
-                                credentialsId: 'kubeconfig-prod',
+                                credentialsId: 'kubeconfg-prod',
                                 variable: 'KUBECONFIG'
                             )]) {
                                 sh """
