@@ -15,22 +15,24 @@ spec:
     image: python:3.11-slim
     command: ['cat']
     tty: true
-  - name: docker
-    image: docker:latest
-    command: ['cat']
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor
+    command: ['/busybox/cat']
     tty: true
-    # 关键：添加 volumeMounts 挂载 docker.sock
+    env:
+    - name: DOCKER_CONFIG
+      value: /home/user/.docker
     volumeMounts:
-    - name: docker-sock
-      mountPath: /var/run/docker.sock
+    - name: docker-config
+      mountPath: /home/user/.docker
+  volumes:
+    - name: docker-config
+    secret:
+      secretName: registry-secret
   - name: kubectl
     image: alpine/kubectl
     command: ['cat']
     tty: true
-  volumes:
-  - name: docker-sock
-    hostPath:
-      path: /var/run/docker.sock
 """
         }
     }
