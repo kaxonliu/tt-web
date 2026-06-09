@@ -24,7 +24,7 @@ spec:
     - name: docker-sock
       mountPath: /var/run/docker.sock
   - name: kubectl
-    image: cnych/kubectl
+    image: alpine/kubectl
     command: ['cat']
     tty: true
   volumes:
