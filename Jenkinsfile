@@ -12,10 +12,10 @@ spec:
   serviceAccountName: jenkins
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor
+    image: gcr.io/kaniko-project/executor:v1.9.0-debug
     imagePullPolicy: IfNotPresent
-    command: ['/busybox/sh']
-    args: '-c trap \"exit 0\" TERM; while true; do :; done'
+    imagePullPolicy: IfNotPresent
+    command: ['//busybox/cat']
     tty: true
     env:
     - name: DOCKER_CONFIG
