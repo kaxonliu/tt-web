@@ -98,7 +98,7 @@ spec:
                     script {
                         echo "当前分支：${env.GIT_BRANCH}"
                         
-                        if (env.GIT_BRANCH == 'origin/master') {
+                        if (env.GIT_BRANCH == 'origin/main') {
                             echo "部署到生产K8S集群"
                             withCredentials([file(
                                 credentialsId: 'kubeconfig-prod',
