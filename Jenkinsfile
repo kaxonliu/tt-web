@@ -11,7 +11,7 @@ metadata:
 spec:
   serviceAccountName: jenkins
   containers:
-  - name: python-3.11-slim
+  - name: python-3-11-slim
     image: python:3.11-slim
     command: ['cat']
     tty: true
