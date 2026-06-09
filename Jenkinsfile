@@ -11,11 +11,6 @@ metadata:
 spec:
   serviceAccountName: jenkins
   containers:
-  # JNLP 通信容器，必须存在
-  - name: jnlp
-    image: jenkins/inbound-agent:3355.v388858a_47b_33-3-jdk21
-    args: ["$(JENKINS_SECRET)", "$(JENKINS_NAME)"]
-    imagePullPolicy: IfNotPresent
   - name: python-3-11-slim
     image: python:3.11-slim
     imagePullPolicy: IfNotPresent
