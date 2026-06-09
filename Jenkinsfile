@@ -14,7 +14,8 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor
     imagePullPolicy: IfNotPresent
-    command: ['sleep', 'infinity']
+    command: '/busybox/sh',
+    args: '-c trap \"exit 0\" TERM; while true; do :; done',
     tty: true
     env:
     - name: DOCKER_CONFIG
