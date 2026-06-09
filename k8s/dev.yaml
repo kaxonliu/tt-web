@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: IMAGE_PLACEHOLDER   # Jenkinsfile 中会动态替换
+        image: BUILD_TAG   # Jenkinsfile 中会动态替换
         ports:
         - containerPort: 8000
         livenessProbe:
