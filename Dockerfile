@@ -1,5 +1,5 @@
 # 使用官方 Python 运行时作为基础镜像
-FROM python:3.11-slim
+FROM 192.168.43.80:30002/pythonwebproject/tt-web:latest
 
 # 设置工作目录
 WORKDIR /app
