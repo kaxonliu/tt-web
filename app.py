@@ -6,6 +6,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def hello():
     """返回 Hello World JSON 响应"""
+    print("Received a request to '/' endpoint")
     return jsonify({"message": "Hello World"})
 
 
