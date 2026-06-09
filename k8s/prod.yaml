@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: IMAGE_PLACEHOLDER   # Jenkinsfile 中会动态替换
+        image: "192.168.43.80:30002/pythonwebproject/tt-web:IMAGE_TAG"   # Jenkinsfile 中会动态替换
         ports:
         - containerPort: 8000
         livenessProbe:
