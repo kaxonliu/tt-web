@@ -55,9 +55,7 @@ build-image:
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}"
       --destination "${CI_REGISTRY_IMAGE}:latest"
-      --cache=true     
-      --username "${HARBOR_USERNAME}"
-      --password "${HARBOR_PASSWORD}"
+      --cache=true
   only:
     - main
   # 如果需要推送至私有仓库，可配置 docker config 作为 secret
