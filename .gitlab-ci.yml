@@ -29,7 +29,7 @@ test:
 build-image:
   stage: build-image
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: gcr.io/kaniko-project/executor:v1.22.0-debug
     entrypoint: [""]
   script:
     # Kaniko 自动读取 docker 配置并推送镜像
