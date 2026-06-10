@@ -5,7 +5,7 @@ stages:
 
 variables:
   # 镜像仓库配置（使用 GitLab 自带的 Container Registry）
-  CI_REGISTRY: http://192.168.43.80:30002
+  CI_REGISTRY: 192.168.43.80:30002
   CI_REGISTRY_IMAGE: ${CI_REGISTRY}/${CI_PROJECT_PATH}  # 完整镜像名: 仓库地址/项目路径
   IMAGE_TAG: ${CI_COMMIT_SHORT_SHA}         # 使用 commit short SHA 作为镜像标签
   # 部署相关
