@@ -29,8 +29,25 @@ test:
 build-image:
   stage: build-image
   image:
-    name: gcr.io/kaniko-project/executor:v1.22.0-debug
+    name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
+  before_script:
+    # 1. 创建 /kaniko/.docker 目录
+    - mkdir -p /kaniko/.docker
+
+    # 2. 生成 config.json 文件
+    # 这里的参数需要替换为你的 Harbor 地址和 GitLab CI 变量
+    - |
+      cat > /kaniko/.docker/config.json <<EOF
+      {
+        "auths": {
+          "192.168.43.80:30002": {
+            "username": "${HARBOR_USERNAME}",
+            "password": "${HARBOR_PASSWORD}"
+          }
+        }
+      }
+      EOF
   script:
     # Kaniko 自动读取 docker 配置并推送镜像
     - /kaniko/executor
