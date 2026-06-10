@@ -6,11 +6,11 @@ stages:
 variables:
   # 镜像仓库配置（使用 GitLab 自带的 Container Registry）
   CI_REGISTRY: 192.168.43.80:30002
-  CI_REGISTRY_IMAGE: ${CI_REGISTRY}/${CI_PROJECT_PATH}  # 完整镜像名: 仓库地址/项目路径
+  CI_REGISTRY_IMAGE: ${CI_REGISTRY}/pythonwebproject/${CI_PROJECT_NAME}  # 完整镜像名: 仓库地址/项目路径
   IMAGE_TAG: ${CI_COMMIT_SHORT_SHA}         # 使用 commit short SHA 作为镜像标签
   # 部署相关
-  K8S_NAMESPACE: python-app                 # 替换为你的命名空间
-  DEPLOYMENT_NAME: python-api               # 替换为你的 Deployment 名称
+  K8S_NAMESPACE: default          # 替换为你的命名空间
+  DEPLOYMENT_NAME: hello-flask              # 替换为你的 Deployment 名称
 
 # 缓存 Python 依赖（可选，加快 test 阶段）
 cache:
@@ -52,7 +52,7 @@ deploy:
   image: bitnami/kubectl:latest
   script:
     # kubectl 会自动使用环境变量 KUBECONFIG 指向的配置文件
-    - sed -i "s|IMAGE_PLACEHOLDER|${CI_REGISTRY_IMAGE}:${IMAGE_TAG}|g" k8s/prod.yaml
+    - sed -i 's/IMAGE_TAG/${IMAGE_TAG}/g' ./k8s/prod.yaml
     - kubectl apply -f k8s/prod.yaml -n ${K8S_NAMESPACE}
     - kubectl rollout status deployment/${DEPLOYMENT_NAME} -n ${K8S_NAMESPACE}
   only:
