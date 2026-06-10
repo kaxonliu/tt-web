@@ -69,7 +69,8 @@ deploy:
   image: bitnami/kubectl:latest
   script:
     # kubectl 会自动使用环境变量 KUBECONFIG 指向的配置文件
-    - sed -i 's/IMAGE_TAG/${IMAGE_TAG}/g' ./k8s/prod.yaml
+    # - sed -i 's/IMAGE_TAG/${IMAGE_TAG}/g' ./k8s/prod.yaml
+    - sed -i "s|IMAGE_TAG|${IMAGE_TAG}|g" ./k8s/prod.yaml
     - kubectl apply -f k8s/prod.yaml -n ${K8S_NAMESPACE}
     - kubectl rollout status deployment/${DEPLOYMENT_NAME} -n ${K8S_NAMESPACE}
   only:
