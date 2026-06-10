@@ -75,10 +75,10 @@ spec:
             }
         }
         
-        stage('Build') {
+        stage('Build & Push Image') {
             steps {
                 container('kaniko') {
-                    echo "3. 构建镜像"
+                    echo "构建并推送镜像"
                     script {
                         sh """
                             /kaniko/executor \

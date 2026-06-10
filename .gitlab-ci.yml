@@ -1,0 +1,30 @@
+# 定义构建阶段
+stages:
+  - build
+  - test
+  - deploy
+
+# 缓存依赖，加速后续构建
+cache:
+  paths:
+    - node_modules/
+
+# 构建任务
+build_job:
+  stage: build
+  script:
+    - echo "正在构建项目..."
+
+# 测试任务
+test_job:
+  stage: test
+  script:
+    - echo "正在运行测试..."
+
+
+deploy_job:
+  stage: deploy
+  script:
+    - 'echo "开始部署..."'
+  only:
+    - main         # 只有main分支的变动才触发此任务
