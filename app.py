@@ -7,6 +7,7 @@ app = Flask(__name__)
 def hello():
     """返回 Hello World JSON 响应"""
     print("Received a request to '/' endpoint")
+    print("Received a request to '/' endpoint")
     return jsonify({"message": "Hello World"})
 
 
